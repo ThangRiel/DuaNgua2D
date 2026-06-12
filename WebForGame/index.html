@@ -40,10 +40,10 @@
         const raceTracks = document.getElementById('race-tracks');
         const horses = new Map();
 
+        // Hàm tạo bộ khung HTML cho 1 con ngựa
         function createHorseRow(id) {
             const container = document.createElement('div');
             container.className = 'horse-container';
-            container.dataset.id = id;
 
             const label = document.createElement('strong');
             label.textContent = `Ngựa số ${id}`;
@@ -64,7 +64,8 @@
             container.appendChild(label);
             container.appendChild(percentText);
             container.appendChild(track);
-            return { container, label, percentText, horse };
+
+            return { container, percentText, horse };
         }
 
         async function updateRace() {
@@ -72,33 +73,30 @@
                 const res = await fetch('/api/data');
                 const data = await res.json();
 
-                if (!data || Object.keys(data).length === 0) {
-                    raceTracks.textContent = 'Chưa có dữ liệu... Bật game lên đi!';
-                    horses.clear();
-                    return;
+                if (!data || Object.keys(data).length === 0) return;
+
+                // Dọn cái chữ "Chưa có dữ liệu..." đi khi đã có data
+                if (raceTracks.textContent.includes('Chưa có dữ liệu')) {
+                    raceTracks.innerHTML = '';
                 }
 
-                for (const [id, percent] of Object.entries(data)) {
-                    const value = Number(percent);
-                    let row = horses.get(id);
-                    if (!row) {
-                        row = createHorseRow(id);
-                        horses.set(id, row);
-                        raceTracks.appendChild(row.container);
+                // Cập nhật từng con ngựa
+                for (const [id, dataObj] of Object.entries(data)) {
+                    // Nếu ngựa chưa có trên giao diện thì gọi hàm tạo mới
+                    if (!horses.has(id)) {
+                        const newRow = createHorseRow(id);
+                        raceTracks.appendChild(newRow.container);
+                        horses.set(id, newRow);
                     }
 
-                    row.percentText.textContent = `${value.toFixed(1)}%`;
-                    row.horse.style.width = `${value}%`;
+                    // Lôi con ngựa đó ra và update thanh %
+                    const row = horses.get(id);
+                    let rankText = dataObj.rank > 0 ? `<span style="color:red; font-weight:bold;"> - 🏆 Hạng ${dataObj.rank}</span>` : '';
+
+                    row.percentText.innerHTML = `${dataObj.percent.toFixed(1)}% ${rankText}`;
+                    row.horse.style.width = `${dataObj.percent}%`;
                 }
 
-                // Xóa các ngựa không còn trong dữ liệu
-                for (const existingId of Array.from(horses.keys())) {
-                    if (!(existingId in data)) {
-                        const row = horses.get(existingId);
-                        row.container.remove();
-                        horses.delete(existingId);
-                    }
-                }
             } catch (err) {
                 console.log('Mất kết nối server', err);
             }

@@ -91,7 +91,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HorseRacing
   horseId: 1
   serverUrl: http://localhost:8080/api/update
-  startX: -8
-  finishX: 8
+  startX: 0
+  finishX: 500
   minSpeed: 8.62
   maxSpeed: 11.65
+  randomnessFactor: 0.23

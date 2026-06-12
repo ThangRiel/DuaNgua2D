@@ -10,8 +10,8 @@ let horsesData = {};
 
 // Unity bắn data vào đây
 app.post('/api/update', (req, res) => {
-    const { horseId, percent } = req.body;
-    horsesData[horseId] = percent;
+    const { horseId, percent, rank } = req.body;
+    horsesData[horseId] = { percent, rank };
     res.sendStatus(200);
 });
 
