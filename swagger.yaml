@@ -1,0 +1,68 @@
+openapi: 3.0.0
+info:
+  title: Horse Racing Live API
+  version: 1.0.0
+  description: API dùng để nhận dữ liệu tiến độ ngựa từ Unity và trả về cho web hiển thị.
+
+servers:
+  - url: http://localhost:8080
+    description: Local Node.js server for the race dashboard
+
+paths:
+  /api/update:
+    post:
+      summary: Cập nhật tiến độ ngựa
+      description: Unity gửi dữ liệu vị trí, phần trăm hoàn thành và hạng của từng con ngựa.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - horseId
+                - percent
+                - rank
+              properties:
+                horseId:
+                  type: string
+                  example: horse_1
+                percent:
+                  type: number
+                  format: float
+                  example: 45.6
+                rank:
+                  type: integer
+                  example: 0
+      responses:
+        '200':
+          description: Dữ liệu cập nhật thành công
+
+  /api/data:
+    get:
+      summary: Lấy dữ liệu đua hiện tại
+      description: Trả về trạng thái tiến độ của tất cả các con ngựa đang được theo dõi.
+      responses:
+        '200':
+          description: Danh sách trạng thái ngựa
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  properties:
+                    percent:
+                      type: number
+                      example: 45.6
+                    rank:
+                      type: integer
+                      example: 2
+
+  /:
+    get:
+      summary: Trang web demo
+      description: Trả về giao diện hiển thị đua ngựa live.
+      responses:
+        '200':
+          description: HTML page

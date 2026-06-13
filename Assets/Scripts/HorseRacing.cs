@@ -19,23 +19,24 @@ public class HorseRacing : MonoBehaviour
     private float currentSpeed;
 
     private float timer = 0f;
-    private bool isStarted = false;
     private Animator animator;
     private bool isFinished = false;
     private int rank = 0;
+    private int lastOrder;
+    private SpriteRenderer spr;
 
     void Start()
     {
         // Mỗi con ngựa khi bắt đầu sẽ có một tốc độ ngẫu nhiên khác nhau
         currentSpeed = Random.Range(minSpeed, maxSpeed);
         animator = GetComponent<Animator>();
+        spr = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
         // Nếu chưa bấm bắt đầu thì không làm gì cả, đứng im xếp hàng
         if (RaceManager.Instance == null || !RaceManager.Instance.isRacing) return;
-        isStarted = true;
 
         if(animator!=null) animator.SetBool("isRunning", true);
 
@@ -69,6 +70,16 @@ public class HorseRacing : MonoBehaviour
             }
             StartCoroutine(SendDataToServer(horseId, percentComplete,rank));
             timer = 0f;
+        }
+    }
+    void LateUpdate()
+    {
+        int baseOrder = -(int)(transform.position.y * 10);
+
+        if (baseOrder != lastOrder)
+        {
+            lastOrder = baseOrder;
+            spr.sortingOrder = baseOrder;
         }
     }
 
