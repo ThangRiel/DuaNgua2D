@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Đua Ngựa Live</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .track {
+            width: 100%;
+            background: #ddd;
+            height: 30px;
+            margin-top: 5px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .horse {
+            background: red;
+            height: 100%;
+            transition: width 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+            will-change: width;
+        }
+
+        .horse-container {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Trực tiếp Đua Ngựa 🏇</h2>
+    <div id="race-tracks">Chưa có dữ liệu... Bật game lên đi!</div>
+
+    <script>
+        const raceTracks = document.getElementById('race-tracks');
+        const horses = new Map();
+
+        // Hàm tạo bộ khung HTML cho 1 con ngựa
+        function createHorseRow(id) {
+            const container = document.createElement('div');
+            container.className = 'horse-container';
+
+            const label = document.createElement('strong');
+            label.textContent = `Ngựa số ${id}`;
+
+            const percentText = document.createElement('span');
+            percentText.className = 'horse-percent';
+            percentText.style.marginLeft = '8px';
+            percentText.textContent = '0.0%';
+
+            const track = document.createElement('div');
+            track.className = 'track';
+
+            const horse = document.createElement('div');
+            horse.className = 'horse';
+            horse.style.width = '0%';
+
+            track.appendChild(horse);
+            container.appendChild(label);
+            container.appendChild(percentText);
+            container.appendChild(track);
+
+            return { container, percentText, horse };
+        }
+
+        async function updateRace() {
+            try {
+                const res = await fetch('/api/data');
+                const data = await res.json();
+
+                if (!data || Object.keys(data).length === 0) return;
+
+                // Dọn cái chữ "Chưa có dữ liệu..." đi khi đã có data
+                if (raceTracks.textContent.includes('Chưa có dữ liệu')) {
+                    raceTracks.innerHTML = '';
+                }
+
+                // Cập nhật từng con ngựa
+                for (const [id, dataObj] of Object.entries(data)) {
+                    // Nếu ngựa chưa có trên giao diện thì gọi hàm tạo mới
+                    if (!horses.has(id)) {
+                        const newRow = createHorseRow(id);
+                        raceTracks.appendChild(newRow.container);
+                        horses.set(id, newRow);
+                    }
+
+                    // Lôi con ngựa đó ra và update thanh %
+                    const row = horses.get(id);
+                    let rankText = dataObj.rank > 0 ? `<span style="color:red; font-weight:bold;"> - 🏆 Hạng ${dataObj.rank}</span>` : '';
+
+                    row.percentText.innerHTML = `${dataObj.percent.toFixed(1)}% ${rankText}`;
+                    row.horse.style.width = `${dataObj.percent}%`;
+                }
+
+            } catch (err) {
+                console.log('Mất kết nối server', err);
+            }
+        }
+
+        updateRace();
+        setInterval(updateRace, 400);
+    </script>
+</body>
+
+</html>
