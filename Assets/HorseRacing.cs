@@ -6,7 +6,7 @@ public class HorseRacing : MonoBehaviour
 {
     [Header("Cấu hình định danh")]
     public string horseId; // Đặt ID riêng cho mỗi con (Ngựa 1, Ngựa 2...)
-    public string serverUrl = "http://localhost:8080/api/update";
+    public string serverUrl = "https://game-dua-ngua-api.onrender.com/api/update";
 
     [Header("Thông số đường đua")]
     public float startX = -8f;

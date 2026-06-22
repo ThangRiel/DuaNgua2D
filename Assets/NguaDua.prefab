@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HorseRacing
   horseId: 
-  serverUrl: http://localhost:8080/api/update
+  serverUrl: https://game-dua-ngua-api.onrender.com/api/update
   startX: 0
   finishX: 2000
   minSpeed: 1
