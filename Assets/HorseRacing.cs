@@ -61,7 +61,7 @@ public class HorseRacing : MonoBehaviour
 
         // Gửi dữ liệu lên web mỗi 0.3 giây (nhanh hơn cho mượt)
         timer += Time.deltaTime;
-        if (timer >= 0.3f)
+        if (timer >= 0.2f)
         {
             float totalDistance = finishX - startX;
             float currentDistance = transform.position.x - startX;

@@ -188,6 +188,10 @@ PrefabInstance:
       propertyPath: startX
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6024913420116811161, guid: c2412434e2d5a824fa8292ce19b4ecdb, type: 3}
+      propertyPath: horseId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7212629355631539512, guid: c2412434e2d5a824fa8292ce19b4ecdb, type: 3}
       propertyPath: m_Name
       value: NguaDua (2)
@@ -271,7 +275,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.5, y: -1.1}
+  m_AnchoredPosition: {x: -0.5, y: -1.0999908}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &397286124
@@ -321,8 +325,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 152
+  m_fontSizeBase: 152
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -549,6 +553,10 @@ PrefabInstance:
       propertyPath: startX
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6024913420116811161, guid: c2412434e2d5a824fa8292ce19b4ecdb, type: 3}
+      propertyPath: horseId
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7212629355631539512, guid: c2412434e2d5a824fa8292ce19b4ecdb, type: 3}
       propertyPath: m_Name
       value: NguaDua (4)
@@ -755,6 +763,10 @@ PrefabInstance:
       propertyPath: startX
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6024913420116811161, guid: c2412434e2d5a824fa8292ce19b4ecdb, type: 3}
+      propertyPath: horseId
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7212629355631539512, guid: c2412434e2d5a824fa8292ce19b4ecdb, type: 3}
       propertyPath: m_Name
       value: NguaDua (3)
@@ -866,6 +878,10 @@ PrefabInstance:
     - target: {fileID: 6024913420116811161, guid: c2412434e2d5a824fa8292ce19b4ecdb, type: 3}
       propertyPath: startX
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024913420116811161, guid: c2412434e2d5a824fa8292ce19b4ecdb, type: 3}
+      propertyPath: horseId
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7212629355631539512, guid: c2412434e2d5a824fa8292ce19b4ecdb, type: 3}
       propertyPath: m_Name
@@ -1009,8 +1025,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 174.79047, y: -112.2}
-  m_SizeDelta: {x: 110.4191, y: 30}
+  m_AnchoredPosition: {x: 674, y: -407}
+  m_SizeDelta: {x: 451.964, y: 150.545}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1422885349
 MonoBehaviour:
@@ -1164,10 +1180,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1187,7 +1203,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -1313,6 +1329,10 @@ PrefabInstance:
     - target: {fileID: 6024913420116811161, guid: c2412434e2d5a824fa8292ce19b4ecdb, type: 3}
       propertyPath: startX
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024913420116811161, guid: c2412434e2d5a824fa8292ce19b4ecdb, type: 3}
+      propertyPath: horseId
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7212629355631539512, guid: c2412434e2d5a824fa8292ce19b4ecdb, type: 3}
       propertyPath: m_Name
